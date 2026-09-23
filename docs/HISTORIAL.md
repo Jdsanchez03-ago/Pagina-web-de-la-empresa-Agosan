@@ -49,11 +49,12 @@ HTML validado con `html-validate` sin errores.
 
 ## Pendiente
 
-1. **Dominio:** agosan.net sigue apuntando a la web antigua. Falta cambiar el DNS y añadir un archivo `CNAME` con el dominio si se sirve desde GitHub Pages.
-2. **WhatsApp:** el botón usa el 6674-8792 dando por hecho que tiene WhatsApp. Confirmar con el cliente.
-3. **Caché de archivos:** GitHub Pages no permite configurarla (PageSpeed lo marca). Se resuelve solo si el sitio pasa por Cloudflare Pages o Netlify, que sí leen `_headers`.
-4. **CSS que bloquea el renderizado:** se podría incrustar el CSS crítico en el HTML, pero eso obligaría a relajar la política de seguridad. Se decidió mantener la seguridad.
-5. **Sin analítica.** Si se añade alguna, hay que permitir su dominio en la CSP del `<meta>` y en `_headers`.
+1. **Subir a Cloudflare Pages.** Resuelve la caché de archivos (GitHub Pages no permite configurarla y PageSpeed lo marca), porque Cloudflare sí lee `_headers`.
+2. **Dominio (último paso, después de Cloudflare):** agosan.net sigue apuntando a la web antigua. Cuando el sitio esté en Cloudflare Pages, se conecta el dominio desde su panel. No hace falta archivo `CNAME` (eso era solo para GitHub Pages).
+3. **Activar la analítica:** la CSP ya permite Cloudflare Web Analytics (`static.cloudflareinsights.com` para el script y `cloudflareinsights.com` para los datos), en el `<meta>` de `index.html` y `404.html` y en `_headers`. Falta activarla en el panel de Cloudflare Pages (Metrics > Web Analytics). No usa cookies, así que no necesita aviso de consentimiento.
+4. **CSS que bloquea el renderizado:** se podría incrustar el CSS crítico en el HTML, pero habría que relajar la CSP o mantener un hash que cambia con cada edición del CSS. Con 99 en móvil la mejora no compensa. Se decidió no hacerlo.
+
+Resuelto: el 6674-8792 sí tiene WhatsApp (confirmado por el cliente el 23 de septiembre de 2026).
 
 ## Herramientas usadas
 
